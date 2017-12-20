@@ -88,6 +88,10 @@ export class TetrisGame extends Component {
     }
   }
 
+  _getWellProps() {
+    
+  }
+
   render() {
     return (
       <div className="tetris-container">
