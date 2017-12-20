@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import marked from 'marked'
 
@@ -52,14 +51,14 @@ Well.PropTypes = {
   grid: PropTypes.array
 }
 
-function mapStateToProps(state) {
-  return {
-    gameStatus: state.gameStatus,
-    grid: state.grid,
-    currTetromino: state.currTetromino,
-    currTetroGrid: state.currTetroGrid,
-    currTetroPosition: state.currTetroPosition
-  }
-}
+// function mapStateToProps(state) {
+//   return {
+//     gameStatus: state.gameStatus,
+//     grid: state.grid,
+//     currTetromino: state.currTetromino,
+//     currTetroGrid: state.currTetroGrid,
+//     currTetroPosition: state.currTetroPosition
+//   }
+// }
 
-export default connect(mapStateToProps)(Well)
+export default Well

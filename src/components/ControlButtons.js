@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import DirectionButton from './DirectionButton'
@@ -76,26 +75,26 @@ class ControlButtons extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    gameStatus: state.gameStatus,
-    isPlaying: state.gameStatus === PLAYING 
-  }
-}
+// function mapStateToProps(state) {
+//   return {
+//     gameStatus: state.gameStatus,
+//     isPlaying: state.gameStatus === PLAYING 
+//   }
+// }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    // onGameInit: () => dispatch(gameInit()),
-    onGameStart: () => dispatch(gameStart()),
-    onGamePause: () => dispatch(gamePause()),
-    onGameResume: () => dispatch(gameResume()),
-    onMoveLeft: () => dispatch(moveLeft()),
-    onMoveRight: () => dispatch(moveRight()),
-    onRotate: () => dispatch(rotate()),
-    onEnableAccelerate: () => dispatch(enableAccelerate()),
-    onDisableAccelerate: () => dispatch(disableAccelerate())
-  }
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     // onGameInit: () => dispatch(gameInit()),
+//     onGameStart: () => dispatch(gameStart()),
+//     onGamePause: () => dispatch(gamePause()),
+//     onGameResume: () => dispatch(gameResume()),
+//     onMoveLeft: () => dispatch(moveLeft()),
+//     onMoveRight: () => dispatch(moveRight()),
+//     onRotate: () => dispatch(rotate()),
+//     onEnableAccelerate: () => dispatch(enableAccelerate()),
+//     onDisableAccelerate: () => dispatch(disableAccelerate())
+//   }
+// }
 
 ControlButtons.PropTypes = {
   gameStatus: PropTypes.string,
@@ -110,4 +109,4 @@ ControlButtons.PropTypes = {
   onRotate: PropTypes.func
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ControlButtons)
+export default ControlButtons

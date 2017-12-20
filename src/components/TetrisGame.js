@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 
 import Well from './Well'
 import InfoPanel from './InfoPanel'
@@ -140,4 +139,4 @@ TetrisGame.PropTypes = {
   onRotate: PropTypes.func
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TetrisGame)
+export default TetrisGame
