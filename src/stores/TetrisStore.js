@@ -128,7 +128,7 @@ export default class TetrisStore {
         })
 
         if (hasLineToClear(newGrid)) {
-          return extendObservable(this, {
+          extendObservable(this, {
             score: score + 10,
             linesCleared: linesCleared + 1,
             grid: clearLines(newGrid),
@@ -139,7 +139,7 @@ export default class TetrisStore {
             dropInterval: dropInterval <= DROP_INTERVAL_MIN ? DROP_INTERVAL_MIN :  dropInterval - DROP_INTERVAL_DEC
           })
         } else {
-          return extendObservable(this, {
+          extendObservable(this, {
             grid: newGrid,
             score: score + 4,
             currTetromino: nextTetromino,
