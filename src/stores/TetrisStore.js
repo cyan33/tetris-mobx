@@ -30,6 +30,10 @@ export default class TetrisStore {
     extendObservable(this, generateInitState())
   }
 
+  updateStorage = (s) => {
+    updateTetrisStateStorage.call(this, s)
+  }
+
   @action('start the game from scratch')
   onGameStart = () => {
     extendObservable(this, generateInitState(true))
@@ -106,7 +110,7 @@ export default class TetrisStore {
 
         // drop until it hits something
         if (isPositionAvailable(grid, currTetroGrid, newPosition)) {
-          // return updateTetrisStateStorage(_.assign({}, state, { currTetroPosition: newPosition }))
+          this.updateStorage()
           this.currTetroPosition = newPosition
           this.onDrop()
           return
@@ -115,7 +119,7 @@ export default class TetrisStore {
         // there is no extra room for the new tetromino, game over
         if (currTetroPosition.y < 0) {
           clearDropTimeout()
-          updateTetrisStateStorage(null)
+          this.updateStorage(null)
           this.gameStatus = STOPPED
           return
         }
@@ -149,6 +153,7 @@ export default class TetrisStore {
           })
         }
       }
+      this.updateStorage()      
       this.onDrop()
     }), isAccelerating ? DROP_INTERVAL_ACCELERATING : dropInterval)
   }
