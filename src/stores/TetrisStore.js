@@ -1,4 +1,4 @@
-import { observable, computed, action, extendObservable, useStrict } from 'mobx'
+import { computed, action, extendObservable, useStrict } from 'mobx'
 import _ from 'lodash'
 
 import { PLAYING, PAUSING, STOPPED } from '../constants/gameStatus'
@@ -33,6 +33,7 @@ export default class TetrisStore {
   @action 'start the game from scratch'
   onGameStart = () => {
     extendObservable(this, generateInitState(true))
+    this.onDrop()
   }
 
   @action 'init the game and possibly extend the game state from storage'

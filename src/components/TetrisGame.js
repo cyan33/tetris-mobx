@@ -19,8 +19,8 @@ class TetrisGame extends Component {
     window.addEventListener('keydown', this._onkeydown)
     window.addEventListener('keyup', this._onkeyup)
 
-    const { onGameInit } = this.props
-    // onGameInit()
+    const { onGameInit } = this.props.tetrisStore
+    onGameInit()
   }
 
   componentWillUnmount() {
@@ -62,7 +62,7 @@ class TetrisGame extends Component {
   }
 
   _onkeyup = (e) => {
-    const { isPlaying, onDisableAccelerate } = this.props
+    const { isPlaying, onDisableAccelerate } = this.props.tetrisStore
     if (!isPlaying) return
 
     if (e.keyCode === DOWN) {
@@ -71,7 +71,7 @@ class TetrisGame extends Component {
   }
 
   _getInfoPanelProps() {
-    const { score, linesCleared, nextTetromino, gameStatus } = this.props
+    const { score, linesCleared, nextTetromino, gameStatus } = this.props.tetrisStore
     return {
       score,
       linesCleared,
@@ -79,11 +79,7 @@ class TetrisGame extends Component {
       gameStatus
     }
   }
-
-  _getWellProps() {
-
-  }
-
+  
   render() {
     return (
       <div className="tetris-container">
