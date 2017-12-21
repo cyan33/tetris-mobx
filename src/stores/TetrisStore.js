@@ -65,7 +65,7 @@ export default class TetrisStore {
     }
 
     if (!isPositionAvailable(grid, currTetroGrid, newPosition)) return
-    this.currTetroPosition = newPosition
+    this.currTetroPosition.x = newPosition.x
   }
 
   @action 'rotate the tetromino'
@@ -107,7 +107,9 @@ export default class TetrisStore {
         // drop until it hits something
         if (isPositionAvailable(grid, currTetroGrid, newPosition)) {
           // return updateTetrisStateStorage(_.assign({}, state, { currTetroPosition: newPosition }))
-          return this.currTetroPosition = newPosition
+          this.currTetroPosition = newPosition
+          this.onDrop()
+          return
         }
         
         // there is no extra room for the new tetromino, game over

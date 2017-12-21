@@ -10,7 +10,7 @@ import GameStatusButton from './GameStatusButton'
 @inject('tetrisStore') @observer
 class ControlButtons extends Component {
   _getPauseButtonProps() {
-    const { isPlaying, gameStatus, onGamePause, onGameResume } = this.props
+    const { isPlaying, gameStatus, onGamePause, onGameResume } = this.props.tetrisStore
     const hasStopped = gameStatus === STOPPED
 
     return {
@@ -75,7 +75,7 @@ class ControlButtons extends Component {
 }
 
 ControlButtons.propTypes = {
-  
+  tetrisStore: PropTypes.object
 }
 
 export default ControlButtons

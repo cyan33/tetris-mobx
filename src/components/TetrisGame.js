@@ -32,8 +32,7 @@ class TetrisGame extends Component {
     e.preventDefault()
     
     const {
-      onMoveLeft,
-      onMoveRight,
+      onHorizontalMove,
       onRotate,
       onEnableAccelerate,
       isPlaying,
@@ -47,10 +46,10 @@ class TetrisGame extends Component {
         onRotate()
         break
       case LEFT:
-        onMoveLeft()
+        onHorizontalMove(-1)
         break
       case RIGHT:
-        onMoveRight()
+        onHorizontalMove(1)
         break
       case DOWN:
         if (isAccelerating) return

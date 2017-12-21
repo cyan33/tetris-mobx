@@ -28,7 +28,7 @@ class Well extends Component {
     const { grid, currTetromino, gameStatus } = this.props.tetrisStore
     return (
       <div className="well-container">
-        <WellGrid grid={ grid } />
+        <WellGrid grid={ grid ? grid.toJS() : grid } />
         {
           currTetromino &&
             <Tetromino { ...this._getTetrominoProps() } />
