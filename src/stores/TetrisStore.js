@@ -19,7 +19,7 @@ import {
 } from '../utils'
 import { getTetrisStateFromStorage, updateTetrisStateStorage } from '../utils/storage'
 
-// useStrict(true)
+useStrict(true)
 
 export default class TetrisStore {
   @computed get isPlaying() {
@@ -30,32 +30,32 @@ export default class TetrisStore {
     extendObservable(this, generateInitState())
   }
 
-  @action 'start the game from scratch'
+  @action('start the game from scratch')
   onGameStart = () => {
     extendObservable(this, generateInitState(true))
     this.onDrop()
   }
 
-  @action 'init the game and possibly extend the game state from storage'
+  @action('init the game and possibly extend the game state from storage')
   onGameInit = () => {
     clearDropTimeout()
     const state = getTetrisStateFromStorage() || generateInitState()
     extendObservable(this, state)
   }
 
-  @action 'pause the game'
+  @action('pause the game')
   onGamePause = () => {
     clearDropTimeout()
     this.gameStatus = PAUSING
   }
 
-  @action 'resume the game'
+  @action('resume the game')
   onGameResume = () => {
     this.onDrop()
     this.gameStatus = PLAYING
   }
 
-  @action 'move the tetromino horizontally'
+  @action('move the tetromino horizontally')
   onHorizontalMove = (direction) => {
     const { currTetroPosition, grid, currTetroGrid } = this
     
@@ -68,7 +68,7 @@ export default class TetrisStore {
     this.currTetroPosition.x = newPosition.x
   }
 
-  @action 'rotate the tetromino'
+  @action('rotate the tetromino')
   onRotate = () => {
     const { currTetroGrid, currTetroPosition, grid } = this
     const newTetroGrid = rotate(currTetroGrid)
@@ -80,7 +80,7 @@ export default class TetrisStore {
     this.currTetroPosition = newPosition
   }
 
-  @action 'drop the tetromino'
+  @action('drop the tetromino')
   onDrop() {
     const { 
       gameStatus,
@@ -95,7 +95,7 @@ export default class TetrisStore {
       nextTetromino
     } = this
 
-    setDropTimeout(() => {
+    setDropTimeout(action(() => {
       if (gameStatus === STOPPED) return
       if (gameStatus === PLAYING) {
         // drop
@@ -150,15 +150,15 @@ export default class TetrisStore {
         }
       }
       this.onDrop()
-    }, isAccelerating ? DROP_INTERVAL_ACCELERATING : dropInterval)
+    }), isAccelerating ? DROP_INTERVAL_ACCELERATING : dropInterval)
   }
 
-  @action 'begin dropping acceleration'
+  @action('begin dropping acceleration')
   onEnableAccelerate = () => {
     this.isAccelerating = true
   }
   
-  @action 'end dropping acceleration'
+  @action('end dropping acceleration')
   onDisableAccelerate = () => {
     this.isAccelerating = false
   }
