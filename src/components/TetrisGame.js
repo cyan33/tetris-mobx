@@ -6,10 +6,6 @@ import DevTools from 'mobx-react-devtools'
 import Well from './Well'
 import InfoPanel from './InfoPanel'
 
-import {
-  gameInit, gamePause, gameResume,
-  moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate
-} from '../actions'
 import { PLAYING } from '../constants/gameStatus'
 import { TETROMINOS } from '../constants/tetromino'
 import { UP, LEFT, RIGHT, DOWN } from '../constants/options' 
@@ -19,13 +15,6 @@ import './styles/TetrisGame.css'
 // export common class component for test
 @inject('tetrisStore') @observer
 class TetrisGame extends Component {
-  constructor() {
-    super()
-
-    this._onkeydown = this._onkeydown.bind(this)
-    this._onkeyup = this._onkeyup.bind(this)
-  }
-
   componentDidMount() {
     window.addEventListener('keydown', this._onkeydown)
     window.addEventListener('keyup', this._onkeyup)
@@ -39,7 +28,7 @@ class TetrisGame extends Component {
     window.removeEventListener('keyup', this._onkeyup)
   }
 
-  _onkeydown(e) {
+  _onkeydown = (e) => {
     e.preventDefault()
     
     const {
@@ -49,7 +38,7 @@ class TetrisGame extends Component {
       onEnableAccelerate,
       isPlaying,
       isAccelerating
-    } = this.props
+    } = this.props.tetrisStore
 
     if(!isPlaying) return
 
@@ -72,7 +61,7 @@ class TetrisGame extends Component {
     }
   }
 
-  _onkeyup(e) {
+  _onkeyup = (e) => {
     const { isPlaying, onDisableAccelerate } = this.props
     if (!isPlaying) return
 
@@ -106,45 +95,8 @@ class TetrisGame extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    gameStatus: state.gameStatus,
-    score: state.score,
-    linesCleared: state.linesCleared,
-    nextTetromino: state.nextTetromino,
-    isPlaying: state.gameStatus === PLAYING,
-    isAccelerating: state.isAccelerating,
-  }
-}
+TetrisGame.propTypes = {
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onGameInit: () => dispatch(gameInit()),
-    onGamePause: () => dispatch(gamePause()),
-    onGameResume: () => dispatch(gameResume()),
-    onMoveLeft: () => dispatch(moveLeft()),
-    onMoveRight: () => dispatch(moveRight()),
-    onRotate: () => dispatch(rotate()),
-    onEnableAccelerate: () => dispatch(enableAccelerate()),
-    onDisableAccelerate: () => dispatch(disableAccelerate())
-  }
-}
-
-TetrisGame.PropTypes = {
-  gameStatus: PropTypes.string,
-  isAccelerating: PropTypes.bool,
-  isPlaying: PropTypes.bool,
-  linesCleared: PropTypes.number,
-  nextTetromino: PropTypes.oneOf(TETROMINOS),
-  score: PropTypes.number,
-  onDisableAccelerate: PropTypes.func,
-  onEnableAccelerate: PropTypes.func,
-  onGameInit: PropTypes.func,
-  onGamePause: PropTypes.func,
-  onGameResume: PropTypes.func,
-  onMoveLeft: PropTypes.func,
-  onMoveRight: PropTypes.func,
-  onRotate: PropTypes.func
 }
 
 export default TetrisGame

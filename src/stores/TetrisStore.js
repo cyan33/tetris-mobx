@@ -30,27 +30,32 @@ export default class TetrisStore {
     extendObservable(this, generateInitState())
   }
 
-  @action onGameStart = () => {
+  @action 'start the game from scratch'
+  onGameStart = () => {
     extendObservable(this, generateInitState(true))
   }
 
-  @action onGameInit = () => {
+  @action 'init the game and possibly extend the game state from storage'
+  onGameInit = () => {
     clearDropTimeout()
     const state = getTetrisStateFromStorage() || generateInitState()
     extendObservable(this, state)
   }
 
-  @action onGamePause = () => {
+  @action 'pause the game'
+  onGamePause = () => {
     clearDropTimeout()
     this.gameStatus = PAUSING
   }
 
-  @action onGameResume = () => {
+  @action 'resume the game'
+  onGameResume = () => {
     this.onDrop()
     this.gameStatus = PLAYING
   }
 
-  @action onHorizontalMove = (direction) => {
+  @action 'move the tetromino horizontally'
+  onHorizontalMove = (direction) => {
     const { currTetroPosition, grid, currTetroGrid } = this
     
     const newPosition = {
@@ -62,7 +67,8 @@ export default class TetrisStore {
     this.currTetroPosition = newPosition
   }
 
-  @action onRotate = () => {
+  @action 'rotate the tetromino'
+  onRotate = () => {
     const { currTetroGrid, currTetroPosition, grid } = this
     const newTetroGrid = rotate(currTetroGrid)
     const newPosition = fitTetrominoWithinBoundaries(grid, newTetroGrid, currTetroPosition)
@@ -73,7 +79,8 @@ export default class TetrisStore {
     this.currTetroPosition = newPosition
   }
 
-  @action onDrop() {
+  @action 'drop the tetromino'
+  onDrop() {
     const { 
       gameStatus,
       isAccelerating,
@@ -143,11 +150,13 @@ export default class TetrisStore {
     }, isAccelerating ? DROP_INTERVAL_ACCELERATING : dropInterval)
   }
 
-  @action onEnableAccelerate = () => {
+  @action 'begin dropping acceleration'
+  onEnableAccelerate = () => {
     this.isAccelerating = true
   }
-
-  @action onDisableAccelerate = () => {
+  
+  @action 'end dropping acceleration'
+  onDisableAccelerate = () => {
     this.isAccelerating = false
   }
 }

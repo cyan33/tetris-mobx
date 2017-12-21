@@ -5,10 +5,6 @@ import DirectionButton from './DirectionButton'
 
 import { PLAYING, STOPPED, PAUSING } from '../constants/gameStatus'
 import GameStatusButton from './GameStatusButton'
-import { 
-  gamePause, gameResume, gameStart,
-  moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate
-} from '../actions'
 
 class ControlButtons extends Component {
   _getPauseButtonProps() {
@@ -96,7 +92,7 @@ class ControlButtons extends Component {
 //   }
 // }
 
-ControlButtons.PropTypes = {
+ControlButtons.propTypes = {
   gameStatus: PropTypes.string,
   isPlaying: PropTypes.bool,
   onDisableAccelerate: PropTypes.func,

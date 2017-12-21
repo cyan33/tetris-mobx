@@ -5,7 +5,7 @@ const Overlay = ({ text }) => (
   <div className="overlay" dangerouslySetInnerHTML={{ __html: text }} />
 )
 
-Overlay.PropTypes = {
+Overlay.propTypes = {
   text: PropTypes.string
 }
 

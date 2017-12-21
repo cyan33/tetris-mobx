@@ -47,7 +47,7 @@ class InfoPanel extends Component {
   }
 }
 
-InfoPanel.PropTypes = {
+InfoPanel.propTypes = {
   gameStatus: PropTypes.string,
   linesCleared: PropTypes.number,
   nextTetromino: PropTypes.oneOf(TETROMINOS),

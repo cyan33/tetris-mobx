@@ -40,7 +40,7 @@ export class Well extends Component {
   }
 }
 
-Well.PropTypes = {
+Well.propTypes = {
   currTetroGrid: PropTypes.array,
   currTetroPosition: PropTypes.shape({
     x: PropTypes.number,

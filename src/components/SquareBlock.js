@@ -5,7 +5,7 @@ const SquareBlock = ({ color }) => (
   <div className="square-block" style={{ backgroundColor: color }}></div>
 )
 
-SquareBlock.PropTypes = {
+SquareBlock.propTypes = {
   color: PropTypes.string
 }
 

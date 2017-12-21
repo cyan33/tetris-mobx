@@ -82,7 +82,7 @@ export default class Tetromino extends Component {
   }
 }
 
-Tetromino.PropTypes = {
+Tetromino.propTypes = {
   currTetroGrid: PropTypes.array,
   currTetroPosition: PropTypes.shape({
     x: PropTypes.number,

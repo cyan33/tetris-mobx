@@ -31,7 +31,7 @@ const DirectionButton = ({
   </div>
 )
 
-DirectionButton.PropTypes = {
+DirectionButton.propTypes = {
   direction: PropTypes.string,
   onClickHandler: PropTypes.func,
   onMouseDownHandler: PropTypes.func,
