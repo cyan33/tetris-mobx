@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
+import DevTools from 'mobx-react-devtools'
 
 import Well from './Well'
 import InfoPanel from './InfoPanel'
@@ -15,7 +17,8 @@ import { UP, LEFT, RIGHT, DOWN } from '../constants/options'
 import './styles/TetrisGame.css'
 
 // export common class component for test
-export class TetrisGame extends Component {
+@inject('tetrisStore') @observer
+class TetrisGame extends Component {
   constructor() {
     super()
 
@@ -28,7 +31,7 @@ export class TetrisGame extends Component {
     window.addEventListener('keyup', this._onkeyup)
 
     const { onGameInit } = this.props
-    onGameInit()
+    // onGameInit()
   }
 
   componentWillUnmount() {
@@ -89,7 +92,7 @@ export class TetrisGame extends Component {
   }
 
   _getWellProps() {
-    
+
   }
 
   render() {
@@ -97,6 +100,7 @@ export class TetrisGame extends Component {
       <div className="tetris-container">
         <Well />
         <InfoPanel {...this._getInfoPanelProps()} />
+        <DevTools />  {/* should ignore DevTools in production */}
       </div>
     )
   }

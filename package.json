@@ -48,7 +48,12 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "gh-pages": "^1.0.0",
     "mobx-react-devtools": "^4.2.15",
     "node-sass-chokidar": "0.0.3",
@@ -100,10 +105,13 @@
   },
   "babel": {
     "plugins": [
-      "transform-decorators-legacy"
+      "transform-decorators-legacy",
+      "transform-class-properties"
     ],
     "presets": [
-      "react-app"
+      "es2015",
+      "stage-0",
+      "react"
     ]
   },
   "eslintConfig": {
