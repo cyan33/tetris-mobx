@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import DirectionButton from './DirectionButton'
 
-import { PLAYING, STOPPED, PAUSING } from '../constants/gameStatus'
+import { STOPPED, PAUSING } from '../constants/gameStatus'
 import GameStatusButton from './GameStatusButton'
 
 @inject('tetrisStore') @observer

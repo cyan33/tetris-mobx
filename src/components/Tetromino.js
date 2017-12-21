@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { observer } from 'mobx-react'
-import PropTypes from 'prop-types'
 
 import SquareBlock from './SquareBlock'
 import { WELL_ROW, WELL_COL } from '../constants/options'
-import { SHAPES, TETROMINOS } from '../constants/tetromino'
+import { SHAPES } from '../constants/tetromino'
 
 
 @observer

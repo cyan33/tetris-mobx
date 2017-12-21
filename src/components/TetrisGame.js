@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
-import PropTypes from 'prop-types'
 import DevTools from 'mobx-react-devtools'
 
 import Well from './Well'
 import InfoPanel from './InfoPanel'
 
-import { PLAYING } from '../constants/gameStatus'
-import { TETROMINOS } from '../constants/tetromino'
 import { UP, LEFT, RIGHT, DOWN } from '../constants/options' 
 
 import './styles/TetrisGame.css'
@@ -91,7 +88,6 @@ class TetrisGame extends Component {
 }
 
 TetrisGame.propTypes = {
-
 }
 
 export default TetrisGame
