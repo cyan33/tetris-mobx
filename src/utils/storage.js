@@ -7,11 +7,23 @@ export function getTetrisStateFromStorage() {
   }
 }
 
-export function updateTetrisStateStorage(state) {
-  if (!state) {
+export function updateTetrisStateStorage(s) {
+  if (s === null) {
     localStorage.removeItem('tetrisState')
     return
   }
+  const state = _.pick(this, [
+    'gameStatus',
+    'isAccelerating',
+    'dropInterval',
+    'grid',
+    'currTetroGrid',
+    'currTetroPosition',
+    'currTetromino',
+    'score',
+    'linesCleared',
+    'nextTetromino'
+  ]);
   localStorage.setItem('tetrisState', JSON.stringify(state))
-  return state
+  return
 }

@@ -10,7 +10,7 @@ const GameStatusButton = ({
   </button>
 )
 
-GameStatusButton.PropTypes = {
+GameStatusButton.propTypes = {
   onClickHandler: PropTypes.func,
   text: PropTypes.string
 }

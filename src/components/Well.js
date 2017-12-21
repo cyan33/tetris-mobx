@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
 import marked from 'marked'
 
@@ -12,9 +12,10 @@ import { GAME_INTRO } from '../constants/options'
 
 import './styles/Well.css'
 
-export class Well extends Component {
+@inject('tetrisStore') @observer
+class Well extends Component {
   _getTetrominoProps() {
-    const { grid, currTetroGrid, currTetroPosition, currTetromino } = this.props
+    const { grid, currTetroGrid, currTetroPosition, currTetromino } = this.props.tetrisStore
     return {
       grid,
       color: COLORS[currTetromino],
@@ -24,10 +25,10 @@ export class Well extends Component {
   }
 
   render() {
-    const { grid, currTetromino, gameStatus } = this.props
+    const { grid, currTetromino, gameStatus } = this.props.tetrisStore
     return (
       <div className="well-container">
-        <WellGrid grid={ grid } />
+        <WellGrid grid={ grid ? grid.toJS() : grid } />
         {
           currTetromino &&
             <Tetromino { ...this._getTetrominoProps() } />
@@ -41,7 +42,7 @@ export class Well extends Component {
   }
 }
 
-Well.PropTypes = {
+Well.propTypes = {
   currTetroGrid: PropTypes.array,
   currTetroPosition: PropTypes.shape({
     x: PropTypes.number,
@@ -52,14 +53,4 @@ Well.PropTypes = {
   grid: PropTypes.array
 }
 
-function mapStateToProps(state) {
-  return {
-    gameStatus: state.gameStatus,
-    grid: state.grid,
-    currTetromino: state.currTetromino,
-    currTetroGrid: state.currTetroGrid,
-    currTetroPosition: state.currTetroPosition
-  }
-}
-
-export default connect(mapStateToProps)(Well)
+export default Well

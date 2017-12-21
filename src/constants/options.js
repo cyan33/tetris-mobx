@@ -16,7 +16,7 @@ export const DOWN = 40
 
 export const GAME_INTRO = `This game is a simplified
  implementation(about 2K lines of code) of the famous
-  game **Tetris**.<br /><br />If you are new to *React* or *Redux*,
+  game **Tetris**.<br /><br />If you are new to *React* or *MobX*,
    this could probably be a good choice where you could get your
     hands dirty. So do not forget to check the
      **[source code](https://github.com/thomasyimgit/Tetris)**.

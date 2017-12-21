@@ -1,21 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import root from './reducers/root'
-import _ from 'lodash'
-import thunk from 'redux-thunk'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'mobx-react'
 
 import TetrisGame from './components/TetrisGame'
+import TetrisStore from './stores/TetrisStore'
 
-const rootStore = createStore(
-  root,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(thunk)
-)
+const t = new TetrisStore()
+
+window.t = t
 
 ReactDOM.render(
-  <Provider store={rootStore}>
+  <Provider tetrisStore={t}>
     <TetrisGame />
   </Provider>,
   document.getElementById('root')

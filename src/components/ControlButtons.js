@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
 
 import DirectionButton from './DirectionButton'
 
-import { PLAYING, STOPPED, PAUSING } from '../constants/gameStatus'
+import { STOPPED, PAUSING } from '../constants/gameStatus'
 import GameStatusButton from './GameStatusButton'
-import { 
-  gamePause, gameResume, gameStart,
-  moveLeft, moveRight, enableAccelerate, disableAccelerate, rotate
-} from '../actions'
 
+@inject('tetrisStore') @observer
 class ControlButtons extends Component {
   _getPauseButtonProps() {
-    const { isPlaying, gameStatus, onGamePause, onGameResume } = this.props
+    const { isPlaying, gameStatus, onGamePause, onGameResume } = this.props.tetrisStore
     const hasStopped = gameStatus === STOPPED
 
     return {
@@ -23,7 +20,7 @@ class ControlButtons extends Component {
   }
 
   _getStartButtonProps() {
-    const { gameStatus, onGameStart } = this.props
+    const { gameStatus, onGameStart } = this.props.tetrisStore
     return {
       text: gameStatus !== STOPPED ? 'Restart' : 'Start',
       onClickHandler: onGameStart 
@@ -31,7 +28,7 @@ class ControlButtons extends Component {
   }
 
   _getDirectionButtonProps(direction) {
-    const { isPlaying, onMoveLeft, onMoveRight, onRotate, onEnableAccelerate, onDisableAccelerate } = this.props
+    const { isPlaying, onHorizontalMove, onRotate, onEnableAccelerate, onDisableAccelerate } = this.props.tetrisStore
     
     if (!isPlaying) return { direction }
 
@@ -40,7 +37,8 @@ class ControlButtons extends Component {
       case 'right':
         return {
           direction,
-          onClickHandler: direction === 'left' ? onMoveLeft : onMoveRight
+          onClickHandler: direction === 'left' ? onHorizontalMove.bind(this.props.tetrisStore, -1) 
+            : onHorizontalMove.bind(this.props.tetrisStore, 1) 
         }
       case 'up':
         return {
@@ -76,38 +74,8 @@ class ControlButtons extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    gameStatus: state.gameStatus,
-    isPlaying: state.gameStatus === PLAYING 
-  }
+ControlButtons.propTypes = {
+  tetrisStore: PropTypes.object
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    // onGameInit: () => dispatch(gameInit()),
-    onGameStart: () => dispatch(gameStart()),
-    onGamePause: () => dispatch(gamePause()),
-    onGameResume: () => dispatch(gameResume()),
-    onMoveLeft: () => dispatch(moveLeft()),
-    onMoveRight: () => dispatch(moveRight()),
-    onRotate: () => dispatch(rotate()),
-    onEnableAccelerate: () => dispatch(enableAccelerate()),
-    onDisableAccelerate: () => dispatch(disableAccelerate())
-  }
-}
-
-ControlButtons.PropTypes = {
-  gameStatus: PropTypes.string,
-  isPlaying: PropTypes.bool,
-  onDisableAccelerate: PropTypes.func,
-  onEnableAccelerate: PropTypes.func,
-  onGamePause: PropTypes.func,
-  onGameResume: PropTypes.func,
-  onGameStart: PropTypes.func,
-  onMoveLeft: PropTypes.func,
-  onMoveRight: PropTypes.func,
-  onRotate: PropTypes.func
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ControlButtons)
+export default ControlButtons

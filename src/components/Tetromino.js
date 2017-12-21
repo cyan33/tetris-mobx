@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { observer } from 'mobx-react'
 
 import SquareBlock from './SquareBlock'
 import { WELL_ROW, WELL_COL } from '../constants/options'
-import { SHAPES, TETROMINOS } from '../constants/tetromino'
+import { SHAPES } from '../constants/tetromino'
 
-export default class Tetromino extends Component {
+
+@observer
+class Tetromino extends Component {
   _getTetrominoUlStyle() {
     const { tetroPosition } = this.props
 
@@ -82,13 +84,15 @@ export default class Tetromino extends Component {
   }
 }
 
-Tetromino.PropTypes = {
-  currTetroGrid: PropTypes.array,
-  currTetroPosition: PropTypes.shape({
-    x: PropTypes.number,
-    y: PropTypes.number
-  }),
-  currTetromino: PropTypes.oneOf(TETROMINOS),
-  gameStatus: PropTypes.string,
-  grid: PropTypes.array
+Tetromino.propTypes = {
+  // currTetroGrid: PropTypes.array,
+  // currTetroPosition: PropTypes.shape({
+  //   x: PropTypes.number,
+  //   y: PropTypes.number
+  // }),
+  // currTetromino: PropTypes.oneOf(TETROMINOS),
+  // gameStatus: PropTypes.string,
+  // grid: PropTypes.array
 }
+
+export default Tetromino

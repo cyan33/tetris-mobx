@@ -49,6 +49,6 @@ export default class WellGrid extends Component {
   }
 }
 
-WellGrid.PropTypes = {
+WellGrid.propTypes = {
   grid: PropTypes.array
 }
