@@ -74,7 +74,9 @@ export default class TetrisStore {
 
   @action('rotate the tetromino')
   onRotate = () => {
-    const { currTetroGrid, currTetroPosition, grid } = this
+    const { currTetromino, currTetroGrid, currTetroPosition, grid } = this
+    if (currTetromino === 'O')  return
+    
     const newTetroGrid = rotate(currTetroGrid)
     const newPosition = fitTetrominoWithinBoundaries(grid, newTetroGrid, currTetroPosition)
   

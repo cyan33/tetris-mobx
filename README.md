@@ -2,7 +2,7 @@
 
 This is a reconstruction project from [Tetris-Redux](https://github.com/cyan33/tetris)
 
-[![Build Status](https://travis-ci.org/cyan33/tetris.svg?branch=master)](https://travis-ci.org/cyan33/tetris)
+[![Build Status](https://travis-ci.org/cyan33/tetris-redux.svg?branch=master)](https://travis-ci.org/cyan33/tetris-redux)
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
 ## Features
